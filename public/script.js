@@ -19,6 +19,9 @@ const products = [];
                 showSection('account');
                 displayOrders(); // Display orders only
             });
+            document.getElementById('login-tab').addEventListener('click', () => {
+                window.location.href = 'sign.html';
+            });
         
             document.getElementById('checkout-btn').addEventListener('click', checkout);
         
