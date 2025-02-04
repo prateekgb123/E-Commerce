@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="" height="25" width="25"><h1>QuickCart</h1>
+        </div>
+        <nav>
+            <a href="#" id="home-tab" class="active">Home</a>
+            <a href="#" id="cart-tab">Cart (<span id="cart-count">0</span>)</a>
+            <a href="#" id="account-tab">Account</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search for products...">
+        </div>
+    </header>
+
+    <!-- Categories Section -->
+    <section id="categories">
+        <h2>Shop by Categories</h2>
+        <div class="categories-grid">
+            <div class="category">
+                <a href="electronics.html">
+                    <img src="images/electronics.jpeg" alt="Electronics">
+                    <h3>Electronics</h3>
+                </a>
+            </div>
+            <div class="category">
+                <a href="fashion.html">
+                    <img src="images/fashion.jpeg" alt="Fashion">
+                    <h3>Fashion</h3>
+                </a>
+            </div>
+            <div class="category">
+                <a href="homeappliances.html">
+                    <img src="images/home.jpeg" alt="Home Appliances">
+                    <h3>Home Appliances</h3>
+                </a>
+            </div>
+            <div class="category">
+                <a href="books.html">
+                    <img src="images/books.jpeg" alt="Books">
+                    <h3>Books</h3>
+                </a>
+            </div>
+            <div class="category">
+                <a href="toys.html">
+                    <img src="images/toys.jpeg" alt="Toys">
+                    <h3>Toys</h3>
+                </a>
+            </div>
+            <div class="category">
+                <a href="fitness.html">
+                    <img src="images/fitness.jpeg" alt="Fitness">
+                    <h3>Fitness</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Main Content -->
+    <main>
+        <section id="home">
+            <h2>Our Products</h2>
+            <div class="products" id="product-list"></div>
+        </section>
+
+        <!-- Cart Section -->
+        <section id="cart" style="display: none;">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <p class="cart-total">Total: $<span id="cart-total">0.00</span></p>
+            <button id="checkout-btn">Checkout</button>
+        </section>
+
+        <!-- Account Section -->
+        <section id="account" style="display: none;">
+            <h2>Order History</h2>
+            <div id="order-history"></div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>About Us</h3>
+                <p>Your one-stop shop for all your needs. Quality products at the best prices.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:support@eshop.com">support@eshop.com</a></p>
+                <p>Phone: <a href="tel:+1234567890">+123-456-7890</a></p>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="Instagram">Instagram</a>
+                <a href="#" aria-label="Twitter">Twitter</a>
+                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 E-Shop. All rights reserved.</p>
+        </div>
+    </footer>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
