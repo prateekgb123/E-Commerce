@@ -25,40 +25,40 @@
 
     <!-- Categories Section -->
     <section id="categories">
-        <h2>Shop by Categories</h2>
+        <div id="shop"><h2>Shop by Categories</h2></div>
         <div class="categories-grid">
-            <div class="category">
-                <a href="electronics.html">
+            <div class="category" data-category="electronics">
+                <a href="#" class="category-link">
                     <img src="images/electronics.jpeg" alt="Electronics">
                     <h3>Electronics</h3>
                 </a>
             </div>
-            <div class="category">
-                <a href="fashion.html">
+            <div class="category" data-category="fashion">
+                <a href="#" class="category-link">
                     <img src="images/fashion.jpeg" alt="Fashion">
                     <h3>Fashion</h3>
                 </a>
             </div>
-            <div class="category">
-                <a href="homeappliances.html">
+            <div class="category" data-category="homeappliances">
+                <a href="#" class="category-link">
                     <img src="images/home.jpeg" alt="Home Appliances">
                     <h3>Home Appliances</h3>
                 </a>
             </div>
-            <div class="category">
-                <a href="books.html">
+            <div class="category" data-category="books">
+                <a href="#" class="category-link">
                     <img src="images/books.jpeg" alt="Books">
                     <h3>Books</h3>
                 </a>
             </div>
-            <div class="category">
-                <a href="toys.html">
+            <div class="category" data-category="toys">
+                <a href="#" class="category-link">
                     <img src="images/toys.jpeg" alt="Toys">
                     <h3>Toys</h3>
                 </a>
             </div>
-            <div class="category">
-                <a href="fitness.html">
+            <div class="category" data-category="fitness">
+                <a href="#" class="category-link">
                     <img src="images/fitness.jpeg" alt="Fitness">
                     <h3>Fitness</h3>
                 </a>
@@ -66,11 +66,17 @@
         </div>
     </section>
     
+    <section id="category-details" style="display: none;">
+        <button id="back-button">Back to Categories</button>
+        <div id="details-content"></div>
+    </section>
+    
+    
 
     <!-- Main Content -->
     <main>
         <section id="home">
-            <h2>Our Products</h2>
+            <div id="pro"><h2>Our Products</h2></div>
             <div class="products" id="product-list"></div>
         </section>
 

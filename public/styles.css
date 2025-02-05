@@ -118,34 +118,50 @@ h2 {
 }
 
 /* Product Grid */
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+#product-list {
+    display: flex;
+    flex-wrap: wrap; /* Allows products to wrap to the next line if needed */
+    justify-content: space-around; /* Space out products evenly */
+    gap: 20px; /* Space between products */
 }
 
 .product {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.product:hover {
-    transform: scale(1.05);
+    flex: 0 1 200px; /* Flex item, with a base width of 200px */
+    margin-bottom: 20px; /* Space at the bottom of each product */
+    text-align: center; /* Center the text */
+    border: 1px solid #ddd; /* Add border for better visual separation */
+    padding: 10px;
+    border-radius: 8px; /* Optional: Add rounded corners */
 }
 
 .product img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 4px; /* Optional: Add rounded corners to images */
 }
 
 .product h3 {
+    font-size: 16px;
     margin: 10px 0;
-    font-size: 20px;
+}
+
+.product p {
+    font-size: 14px;
+    color: #555;
+}
+
+.product button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.product button:hover {
+    background-color: #0056b3;
 }
 
 /* Cart Section */
