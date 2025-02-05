@@ -206,6 +206,13 @@ const backButton = document.getElementById("back-button");
 const categoriesSection = document.getElementById("categories");
 const shopdetatils = document.getElementById("shop");
 const prodetatils = document.getElementById("pro");
+let productIdCounter = 1;
+for (const category in categoryData) {
+    categoryData[category] = categoryData[category].map(product => ({
+        ...product,
+        id: productIdCounter++
+    }));
+}
 
 // Function to show category details
 function showCategoryDetails(category) {
@@ -238,8 +245,6 @@ function showCategoryDetails(category) {
         </div>
     `;
 }
-
-
 categoriesGrid.addEventListener("click", (event) => {
     event.preventDefault();
     const categoryElement = event.target.closest(".category");
@@ -321,7 +326,15 @@ function loadProducts() {
 }
 
 function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
+    let product = products.find(p => p.id === productId);
+    if (!product) {
+        // If not found in products, search in categoryData
+        for (const category in categoryData) {
+            product = categoryData[category].find(p => p.id === productId);
+            if (product) break;
+        }
+    }
+
     if (product) {
         cart.push({...product}); // Add a copy of the product to cart
         updateCartCount();
