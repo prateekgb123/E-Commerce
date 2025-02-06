@@ -232,8 +232,11 @@ function showCategoryDetails(category) {
 
     // Populate the details content with products from the category
     detailsContent.innerHTML = `
-        <h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-        <div class="category-products">
+  <h2 style="text-align: center; font-size: 45px !important; font-weight: 600 !important; color: black;">
+    ${category.charAt(0).toUpperCase() + category.slice(1)}
+</h2>
+
+    <div class="category-products">
             ${data.map(product => `
                 <div class="product">
                     <h2>${product.name}</h2>

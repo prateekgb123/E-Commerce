@@ -66,6 +66,11 @@ header .search-container input {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+#shop{
+    font-size: 25px;
+    font-weight: 600;
+
+}
 #categories {
     text-align: center;
     padding: 20px;
@@ -98,6 +103,13 @@ header .search-container input {
     border-radius: 10px;
     margin-bottom: 10px;
 }
+.category-products{
+    display: flex;
+    flex-wrap: wrap;
+}
+.category-products h2{
+    text-align: center;
+}
 #category-products h2 {
     text-align: center; /* This centers the text horizontally */
     margin: 0 auto; /* Ensures there's no extra margin */
@@ -111,7 +123,10 @@ main {
     flex: 1; 
 }
 
-
+#pro{
+    font-size: 30px;
+    font-weight: 600;
+}
 h2 {
     color: #2c3e50;
     margin-bottom: 20px;
@@ -120,17 +135,21 @@ h2 {
 /* Product Grid */
 #product-list {
     display: flex;
-    flex-wrap: wrap; /* Allows products to wrap to the next line if needed */
-    justify-content: space-around; /* Space out products evenly */
-    gap: 20px; /* Space between products */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 20px;
+    width: 100%; /* Ensure the container has full width */
 }
 
+
+
+
+/*this is for displaying products in home page  */
 .product {
-    flex: 0 1 200px; /* Flex item, with a base width of 200px */
-    margin-bottom: 20px; /* Space at the bottom of each product */
+    flex: 1 1 calc(22% - 20px); /* Slightly larger width for each product */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
     text-align: center; /* Center the text */
     border: 1px solid #ddd; /* Add border for better visual separation */
-    padding: 10px;
+    padding: 20px; /* Increase padding for a more spacious design */
     border-radius: 8px; /* Optional: Add rounded corners */
 }
 
@@ -141,27 +160,27 @@ h2 {
 }
 
 .product h3 {
-    font-size: 16px;
-    margin: 10px 0;
+    font-size: 18px; /* Increase font size for product titles */
+    margin: 15px 0;
 }
 
 .product p {
-    font-size: 14px;
-    color: #555;
+    font-size: 15px; /* Slightly larger description text */
+    color: #555; /* Maintain subtle gray color */
 }
 
 .product button {
-    background-color: #007bff;
+    background-color: #4a90e2; /* Softer blue for the button */
     color: white;
-    padding: 10px;
+    padding: 12px; /* Slightly larger padding for the button */
     border: none;
-    border-radius: 5px;
+    border-radius: 5px; /* Rounded corners for the button */
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px; /* Increase font size for better readability */
 }
 
 .product button:hover {
-    background-color: #0056b3;
+    background-color: #357abd; /* Darker shade of the new blue for hover effect */
 }
 
 /* Cart Section */
