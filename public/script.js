@@ -28,7 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('search-bar').addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
-        const filteredProducts = products.filter(p => p.name.toLowerCase().includes(query));
+
+        // Get the currently displayed products
+        const currentProducts = 
+            (document.getElementById('product-list').style.display === 'block') 
+            ? products 
+            : (categoryData[currentCategory] || []); 
+
+        const filteredProducts = currentProducts.filter(p => p.name.toLowerCase().includes(query));
         displayProducts(filteredProducts);
     });
 });
@@ -189,10 +196,12 @@ const categoryData = {
 document.addEventListener('DOMContentLoaded', () => {
     const category = window.location.pathname.split('/').pop().split('.')[0];  // Get category name from the URL (e.g., 'electronics')
     if (categoryData[category]) {
-        displayProducts(categoryData[category]);
+        displayProducts(categoryData[category]); 
+    } else {
+        // If no category is specified in the URL, load all products initially
+        loadProducts(); 
     }
 });
-
 // Select DOM elements
 const categoriesGrid = document.querySelector(".categories-grid");
 const categoryDetails = document.getElementById("category-details");
@@ -283,67 +292,35 @@ function displayProducts(productList) {
 }
 
 function loadProducts() {
-    const productDetails = [
-        { name: "Wireless Earbuds", image: "https://via.placeholder.com/200?text=Wireless+Earbuds" },
-        { name: "Smartphone Case", image: "https://via.placeholder.com/200?text=Smartphone+Case" },
-        { name: "Laptop Stand", image: "https://via.placeholder.com/200?text=Laptop+Stand" },
-        { name: "Bluetooth Speaker", image: "https://via.placeholder.com/200?text=Bluetooth+Speaker" },
-        { name: "Gaming Mouse", image: "https://via.placeholder.com/200?text=Gaming+Mouse" },
-        { name: "USB-C Hub", image: "https://via.placeholder.com/200?text=USB-C+Hub" },
-        { name: "Fitness Tracker", image: "https://via.placeholder.com/200?text=Fitness+Tracker" },
-        { name: "Mechanical Keyboard", image: "https://via.placeholder.com/200?text=Mechanical+Keyboard" },
-        { name: "Smartwatch", image: "https://via.placeholder.com/200?text=Smartwatch" },
-        { name: "Noise Cancelling Headphones", image: "https://via.placeholder.com/200?text=Noise+Cancelling+Headphones" },
-        { name: "Portable Power Bank", image: "https://via.placeholder.com/200?text=Power+Bank" },
-        { name: "4K Action Camera", image: "https://via.placeholder.com/200?text=4K+Action+Camera" },
-        { name: "Wireless Charger", image: "https://via.placeholder.com/200?text=Wireless+Charger" },
-        { name: "LED Desk Lamp", image: "https://via.placeholder.com/200?text=LED+Desk+Lamp" },
-        { name: "Mini Drone", image: "https://via.placeholder.com/200?text=Mini+Drone" },
-        { name: "External Hard Drive", image: "https://via.placeholder.com/200?text=External+Hard+Drive" },
-        { name: "VR Headset", image: "https://via.placeholder.com/200?text=VR+Headset" },
-        { name: "Streaming Webcam", image: "https://via.placeholder.com/200?text=Streaming+Webcam" },
-        { name: "Desk Organizer", image: "https://via.placeholder.com/200?text=Desk+Organizer" },
-        { name: "Portable Monitor", image: "https://via.placeholder.com/200?text=Portable+Monitor" },
-        { name: "Digital Notebook", image: "https://via.placeholder.com/200?text=Digital+Notebook" },
-        { name: "Robot Vacuum Cleaner", image: "https://via.placeholder.com/200?text=Robot+Vacuum+Cleaner" },
-        { name: "Streaming Microphone", image: "https://via.placeholder.com/200?text=Streaming+Microphone" },
-        { name: "Adjustable Phone Stand", image: "https://via.placeholder.com/200?text=Phone+Stand" },
-        { name: "Electric Scooter", image: "https://via.placeholder.com/200?text=Electric+Scooter" }
-    ];
-
-    productDetails.forEach((product, index) => {
-        products.push({
-            id: index + 1,
-            name: product.name,
-            price: (Math.random() * 100).toFixed(2),
-            image: product.image
-        });
-    });
-
-    displayProducts(products);
+    // Load all products initially
+    displayProducts(Object.values(categoryData).flat()); 
 }
-
 function addToCart(productId) {
-    let product = products.find(p => p.id === productId);
-    if (!product) {
-        // If not found in products, search in categoryData
-        for (const category in categoryData) {
-            product = categoryData[category].find(p => p.id === productId);
-            if (product) break;
-        }
+    // Find the product in the category data
+    let selectedProduct = null;
+    for (const category in categoryData) {
+        selectedProduct = categoryData[category].find(product => product.id === productId);
+        if (selectedProduct) break; // Stop searching once the product is found
     }
 
-    if (product) {
-        cart.push({...product}); // Add a copy of the product to cart
+    if (selectedProduct) {
+        // Check if the product is already in the cart
+        const cartItem = cart.find(item => item.id === productId);
+        if (cartItem) {
+            cartItem.quantity += 1; // Increase quantity if it already exists
+        } else {
+            cart.push({ ...selectedProduct, quantity: 1 }); // Add the product to the cart
+        }
         updateCartCount();
-        alert('Product added to cart!');
+        alert(`${selectedProduct.name} has been added to your cart!`);
     } else {
-        console.error('Product not found:', productId);
+        console.error('Product not found!');
     }
 }
 
 function updateCartCount() {
-    document.getElementById('cart-count').textContent = cart.length;
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    document.getElementById('cart-count').textContent = cartCount;
 }
 
 function displayCart() {
