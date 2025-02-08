@@ -20,7 +20,9 @@
         </nav>
         <div class="search-container">
             <input type="text" id="search-bar" placeholder="Search for products...">
+            <div id="product-container"></div>
         </div>
+        
     </header>
 
     <!-- Categories Section -->
@@ -84,14 +86,14 @@
         <section id="cart" style="display: none;">
             <h2>Your Cart</h2>
             <div id="cart-items"></div>
-            <p class="cart-total">Total: ₹<span id="cart-total">0.00</span></p>
+            <p class="cart-total"><span id="cart-total"></span></p>
             <button id="checkout-btn">Checkout</button>
         </section>
 
         <!-- Account Section -->
         <section id="account" style="display: none;">
             <h2>Order History</h2>
-            <div id="order-history"></div>
+            <div id="orders"></div>
         </section>
     </main>
 
