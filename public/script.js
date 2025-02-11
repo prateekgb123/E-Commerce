@@ -270,11 +270,12 @@ function calculateCartTotal() {
 function displayCart() {
     const cartContainer = document.getElementById('cart-items');
     if (cartContainer) {
-        cartContainer.innerHTML = cart.map(item => `
+        cartContainer.innerHTML = cart.map((item, index) => `
             <div class="cart-item">
                 <img src="${item.image}" alt="${item.name}">
                 <h3>${item.name}</h3>
                 <p>₹${item.price}</p>
+                <button onclick="removeFromCart(${index})" class="remove-btn">Remove</button>
             </div>
         `).join('');
         const cartTotal = calculateCartTotal();
@@ -285,6 +286,13 @@ function displayCart() {
         `;
     }
 }
+
+function removeFromCart(index) {
+    cart.splice(index, 1); 
+    updateCartCount(); 
+    displayCart(); 
+}
+
 function displayOrders() {
     const ordersContainer = document.getElementById('orders');
     if (ordersContainer) {
