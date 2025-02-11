@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    dbName: "ECOM",
 }).then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
@@ -29,7 +30,7 @@ const UserSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-});
+}, { collection: "user" });
 
 const User = mongoose.model("User", UserSchema);
 
