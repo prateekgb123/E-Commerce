@@ -1,8 +1,6 @@
 const products = [];
 const cart = [];
 const orders = [];
-
-// Category data with unique IDs
 const categoryData = {
     electronics: 
         [
@@ -28,9 +26,6 @@ const categoryData = {
             { name: "Fitness Tracker", image: "Electronics/fitnesstracker.webp", price: 4000 },
           
         ],
-        
-        
-    
     toys: [
         
             { name: "Action Figure", image: "toys/actionfigure.webp", price: 800 },
@@ -53,8 +48,6 @@ const categoryData = {
             { name: "Remote Control Boat", image: "toys/remotecontrolboat.webp", price: 1800 },
             { name: "Yo-Yo", image: "toys/yoyo.webp", price: 300 },
             { name: "Slime Kit", image: "toys/slimekit.webp", price: 500 }
-          
-          
     ],
     books: [
         { name: "The Great Gatsby", image: "books/thegreatgatsby.webp", price: 300 },
@@ -99,8 +92,6 @@ const categoryData = {
             { name: "Earrings", image: "fashion/earrings.webp", price: 800 },
             { name: "Necklace", image: "fashion/necklace.webp", price: 2000 },
             { name: "Joggers", image: "fashion/joggers.webp", price: 900 }
-          
-          
     ],
     fitness: 
         [
@@ -124,8 +115,6 @@ const categoryData = {
             { name: "Push-Up Bars", image: "fitness/pushupbars.webp", price: 700 },
             { name: "Workout Shorts", image: "fitness/workoutshorts.webp", price: 600 },
             { name: "Sweatband", image: "fitness/sweatband.webp", price: 200 }
-          
-          
     ],
     homeappliances: [
         
@@ -149,13 +138,9 @@ const categoryData = {
             { name: "Induction Cooktop", image: "homeappliances/inductioncooktop.webp", price: 3500 },
             { name: "Rice Cooker", image: "homeappliances/ricecooker.webp", price: 2500 },
             { name: "Chimney", image: "homeappliances/chimney.webp", price: 15000 }
-          
-          
     ],
     
 };
-
-// Add unique IDs to all products
 let productIdCounter = 1;
 Object.keys(categoryData).forEach(category => {
     categoryData[category] = categoryData[category].map(product => ({
@@ -163,19 +148,14 @@ Object.keys(categoryData).forEach(category => {
         id: productIdCounter++,
     }));
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     updateCartCount();
     setupEventListeners();
 });
-
-// Load and display all products initially
 function loadProducts() {
     displayProducts(Object.values(categoryData).flat());
 }
-
-// Generic function to display products
 function displayProducts(productList) {
     const productListContainer = document.getElementById('product-list');
     productListContainer.innerHTML = productList.map(product => `
@@ -187,8 +167,6 @@ function displayProducts(productList) {
         </div>
     `).join('');
 }
-
-// Setup event listeners for navigation and search
 function setupEventListeners() {
     document.getElementById('home-tab').addEventListener('click', () => showSection('home'));
     document.getElementById('cart-tab').addEventListener('click', () => {
@@ -208,8 +186,6 @@ function setupEventListeners() {
     if (searchBar) {
         searchBar.addEventListener('input', handleSearch);
     }
-
-    // Category grid click handling
     const categoriesGrid = document.querySelector(".categories-grid");
     if (categoriesGrid) {
         categoriesGrid.addEventListener("click", event => {
@@ -220,8 +196,6 @@ function setupEventListeners() {
             }
         });
     }
-
-    // Back button handling
     const backButton = document.getElementById("back-button");
     if (backButton) {
         backButton.addEventListener("click", () => {
@@ -231,8 +205,6 @@ function setupEventListeners() {
         });
     }
 }
-
-// Handle search functionality
 function handleSearch(event) {
     const query = event.target.value.trim().toLowerCase();
     if (!query) {
@@ -245,8 +217,6 @@ function handleSearch(event) {
         .filter(product => product.name.toLowerCase().includes(query));
     displayProducts(filteredProducts);
 }
-
-// Show category-specific products
 function showCategoryDetails(category) {
     if (!categoryData[category]) return;
 
@@ -270,8 +240,6 @@ function showCategoryDetails(category) {
             `).join('')}
         </div>
     `;
-
-    // Add an event listener for the back-to-home button
     const backButton = document.getElementById("back-to-home");
     if (backButton) {
         backButton.addEventListener("click", () => {
@@ -281,33 +249,24 @@ function showCategoryDetails(category) {
         });
     }
 }
-
-
-// Add product to the cart
 function addToCart(productId) {
     const product = Object.values(categoryData).flat().find(item => item.id === productId);
     if (product) {
         cart.push(product);
         updateCartCount();
-        displayCart(); // Update the cart display after adding an item
+        displayCart(); 
         alert(`${product.name} added to cart!`);
     }
 }
-
-// Update cart count display
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
     if (cartCount) {
         cartCount.textContent = cart.length;
     }
 }
-
-// Display cart items
 function calculateCartTotal() {
     return cart.reduce((sum, item) => sum + item.price, 0);
 }
-
-// Display cart items and total price
 function displayCart() {
     const cartContainer = document.getElementById('cart-items');
     if (cartContainer) {
@@ -318,8 +277,6 @@ function displayCart() {
                 <p>₹${item.price}</p>
             </div>
         `).join('');
-
-        // Calculate and display the total price
         const cartTotal = calculateCartTotal();
         cartContainer.innerHTML += `
             <div class="cart-total">
@@ -328,7 +285,6 @@ function displayCart() {
         `;
     }
 }
-// Display user orders (placeholder)
 function displayOrders() {
     const ordersContainer = document.getElementById('orders');
     if (ordersContainer) {
@@ -340,45 +296,30 @@ function displayOrders() {
         `).join('');
     }
 }
-
-// Show the specified section
-// Show the specified section 
 function showSection(sectionId) {
-    // Show the correct section and hide others
     document.getElementById('home').style.display = sectionId === 'home' ? 'block' : 'none';
     document.getElementById('cart').style.display = sectionId === 'cart' ? 'block' : 'none';
     document.getElementById('account').style.display = sectionId === 'account' ? 'block' : 'none';
-
-    // Toggle the active class for tabs
     document.getElementById('home-tab').classList.toggle('active', sectionId === 'home');
     document.getElementById('cart-tab').classList.toggle('active', sectionId === 'cart');
     document.getElementById('account-tab').classList.toggle('active', sectionId === 'account');
-
-    // Control visibility of product categories based on section
-    const categoriesContainer = document.getElementById('categories'); // Ensure you have a container with this ID for categories
+    const categoriesContainer = document.getElementById('categories'); 
     if (categoriesContainer) {
         categoriesContainer.style.display = sectionId === 'home' ? 'block' : 'none';
     }
-
-    // Only display products in the home section
     if (sectionId === 'home') {
         displayProducts(products);
     }
 }
-
-
-// Checkout logic
 function checkout() {
     if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
     }
-
-    // Calculate the total and clear the cart
     const total = calculateCartTotal();
     alert(`Checkout successful! Total: ₹${total}`);
     orders.push({ id: orders.length + 1, items: [...cart], total });
-    cart.length = 0; // Clear the cart
+    cart.length = 0;
     updateCartCount();
-    displayCart(); // Clear the cart display after checkout
+    displayCart(); 
 }

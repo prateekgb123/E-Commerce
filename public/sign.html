@@ -108,22 +108,22 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            margin-top: 20px; /* Move to the next line */
+            margin-top: 20px; 
         }
 
         .logout-button:hover {
             background-color: #000000;
-            transform: scale(1.05); /* Slightly increase the size on hover */
+            transform: scale(1.05); 
         }
 
         .logout-button:focus {
-            outline: none; /* Remove focus outline for a cleaner look */
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5); /* Add focus outline with subtle shadow */
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5); 
         }
 
         .logout-button:active {
             background-color: #000000;
-            transform: scale(1); /* Reset scaling when clicked */
+            transform: scale(1); 
         }
 
     </style>
@@ -138,14 +138,14 @@
             <button id="signup-tab">Sign-Up</button>
         </div>
 
-        <!-- Login Form -->
+        
         <form id="login-form" class="active">
             <input type="text" id="login-username" placeholder="Username" required>
             <input type="password" id="login-password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
 
-        <!-- Sign-Up Form -->
+      
         <form id="signup-form">
             <input type="text" id="signup-username" placeholder="Username" required>
             <input type="email" id="signup-email" placeholder="Email" required>
@@ -166,23 +166,23 @@
         const signupForm = document.getElementById('signup-form');
         const loggedInMessage = document.getElementById('logged-in-message');
     
-        // Check if the user is already logged in
+        
         const loggedInUser = localStorage.getItem('loggedInUser');
         if (loggedInUser) {
             loggedInMessage.textContent = `You are logged in as: ${loggedInUser}`;
-            loginForm.style.display = 'none';  // Hide login form if already logged in
-            signupForm.style.display = 'none'; // Hide sign-up form
+            loginForm.style.display = 'none';  
+            signupForm.style.display = 'none'; 
             const logoutButton = document.createElement('button');
             logoutButton.classList.add('logout-button');
             logoutButton.textContent = 'Log Out';
             logoutButton.addEventListener('click', () => {
-                localStorage.removeItem('loggedInUser'); // Clear login status
-                window.location.href = 'sign.html'; // Redirect to login page (this can be your login page URL)
+                localStorage.removeItem('loggedInUser'); 
+                window.location.href = 'sign.html'; 
             });
-            loggedInMessage.appendChild(logoutButton); // Add logout button to the message
+            loggedInMessage.appendChild(logoutButton); 
         }
     
-        // Tab switching logic (only works if not logged in)
+       
         if (!loggedInUser) {
             loginTab.addEventListener('click', () => {
                 loginTab.classList.add('active');
@@ -199,7 +199,7 @@
             });
         }
 
-        // Sign-Up form submission
+      
         signupForm.addEventListener('submit', (e) => {
             e.preventDefault();
     
@@ -213,7 +213,7 @@
                 return;
             }
     
-            // Save user details in localStorage
+            
             const users = JSON.parse(localStorage.getItem('users')) || {};
             if (users[username]) {
                 alert('Username already exists. Please choose a different username.');
@@ -225,17 +225,17 @@
     
             alert(`Sign-Up successful for user: ${username}`);
             signupForm.reset();
-            loginTab.click(); // Switch to login tab
+            loginTab.click(); 
         });
     
-        // Login form submission
+      
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
     
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value.trim();
     
-            // Retrieve user details from localStorage
+            
             const users = JSON.parse(localStorage.getItem('users')) || {};
     
             if (!users[username]) {
@@ -248,14 +248,14 @@
                 return;
             }
     
-            // Show login success message with the username
+            
             alert(`Login successful. Welcome, ${username}!`);
     
-            // Optionally store the username in localStorage to show it on the home page
+          
             localStorage.setItem('loggedInUser', username);
     
-            // Redirect to homepage (or home page can be the logged-in state)
-            window.location.href = 'index.html'; // Replace with your home page URL
+            
+            window.location.href = 'index.html'; 
         });
     </script>
 </body>
