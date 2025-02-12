@@ -295,15 +295,36 @@ function removeFromCart(index) {
 
 function displayOrders() {
     const ordersContainer = document.getElementById('orders');
-    if (ordersContainer) {
-        ordersContainer.innerHTML = orders.map(order => `
-            <div class="order-item">
-                <h3>Order #${order.id}</h3>
-                <p>Total: ₹${order.total}</p>
-            </div>
-        `).join('');
+    if (!ordersContainer) return;
+
+    if (orders.length === 0) {
+        ordersContainer.innerHTML = "<p>No orders have been placed yet.</p>";
+        return;
     }
+
+    ordersContainer.innerHTML = orders.map(order => `
+        <div class="order">
+            <h3>Order ID: ${order.id}</h3>
+            <p><strong>Date:</strong> ${order.date}</p>
+            <p><strong>Status:</strong> ${order.status}</p>
+            <div class="order-items">
+                ${order.items.map(item => `
+                    <div class="order-item">
+                        <img src="${item.image}" alt="${item.name}" class="order-item-image">
+                        <div class="order-item-details">
+                            <h4>${item.name}</h4>
+                            <p>Quantity: ${item.quantity}</p>
+                            <p>Price: ₹${item.price * item.quantity}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+            <p><strong>Total:</strong> ₹${order.total}</p>
+        </div>
+    `).join('');
 }
+
+
 function showSection(sectionId) {
     document.getElementById('home').style.display = sectionId === 'home' ? 'block' : 'none';
     document.getElementById('cart').style.display = sectionId === 'cart' ? 'block' : 'none';
@@ -321,13 +342,31 @@ function showSection(sectionId) {
 }
 function checkout() {
     if (cart.length === 0) {
-        alert('Your cart is empty!');
+        alert("Your cart is empty!");
         return;
     }
-    const total = calculateCartTotal();
-    alert(`Checkout successful! Total: ₹${total}`);
-    orders.push({ id: orders.length + 1, items: [...cart], total });
-    cart.length = 0;
+
+    const order = {
+        id: `ORD${Math.floor(1000 + Math.random() * 9000)}`,
+        date: new Date().toLocaleDateString(),
+        status: "Pending",
+        items: cart.map(item => ({
+            name: item.name,
+            image: item.image,
+            price: item.price,
+            quantity: 1 // You can update this logic to allow multiple quantities
+        })),
+        total: calculateCartTotal(),
+    };
+
+    orders.push(order);
+    cart.length = 0; // Clear the cart
     updateCartCount();
-    displayCart(); 
+    displayCart();
+    alert("Order placed successfully!");
+
+    // Refresh order history
+    if (document.getElementById('account-tab').classList.contains('active')) {
+        displayOrders();
+    }
 }
