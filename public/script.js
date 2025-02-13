@@ -168,7 +168,10 @@ function displayProducts(productList) {
     `).join('');
 }
 function setupEventListeners() {
-    document.getElementById('home-tab').addEventListener('click', () => showSection('home'));
+    document.getElementById('home-tab').addEventListener('click', () => {
+        showSection('home');
+        loadProducts();  
+    });
     document.getElementById('cart-tab').addEventListener('click', () => {
         showSection('cart');
         displayCart();
@@ -354,18 +357,18 @@ function checkout() {
             name: item.name,
             image: item.image,
             price: item.price,
-            quantity: 1 // You can update this logic to allow multiple quantities
+            quantity: 1 
         })),
         total: calculateCartTotal(),
     };
 
     orders.push(order);
-    cart.length = 0; // Clear the cart
+    cart.length = 0; 
     updateCartCount();
     displayCart();
     alert("Order placed successfully!");
 
-    // Refresh order history
+   
     if (document.getElementById('account-tab').classList.contains('active')) {
         displayOrders();
     }
