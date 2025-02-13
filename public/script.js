@@ -4,7 +4,7 @@ const orders = [];
 const categoryData = {
     electronics: 
         [
-            { name: "Smartphone", image: "Electronics/smartphone.webp", price: 20000 },
+            { name: "Smartphone", image: "Electronics/smartphone.webp", price: 120000 },
             { name: "Laptop", image: "Electronics/laptop.webp", price: 50000 },
             { name: "Tablet", image: "Electronics/tablet.webp", price: 25000 },
             { name: "Smartwatch", image: "Electronics/smartwatch.webp", price: 15000 },
@@ -255,13 +255,10 @@ function showCategoryDetails(category) {
 function addToCart(productId) {
     const product = findProductById(productId);
     if (product) {
-      // Check if the product already exists in the cart
       const existingItem = cart.find(item => item.id === productId);
       if (existingItem) {
-        // If it exists, increase the quantity
         existingItem.quantity++;
       } else {
-        // Otherwise, add the product with quantity 1
         cart.push({ ...product, quantity: 1 });
       }
       updateCartCount();
@@ -310,7 +307,6 @@ function updateCartItemQuantity(productId, newQuantity) {
     const itemIndex = cart.findIndex(item => item.id === productId);
     if (itemIndex !== -1) {
       if (newQuantity === 0) {
-        // Remove item if quantity is set to 0
         cart.splice(itemIndex, 1); 
       } else {
         cart[itemIndex].quantity = newQuantity; 

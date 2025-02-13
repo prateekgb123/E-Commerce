@@ -243,7 +243,7 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 #cart h2 {
-    font-size: 28px; /* Increased size */
+    font-size: 35px; 
     font-weight: bold;
     color: #333;
     text-align: center;
@@ -252,9 +252,9 @@ h2 {
   
 #checkout-btn {
     display: block;
-    margin: 20px auto; /* Centers the button horizontally */
+    margin: 20px auto; 
     padding: 12px 20px;
-    background: #28a745; /* Green color for checkout */
+    background: #28a745; 
     color: white;
     border: none;
     border-radius: 6px;
@@ -269,8 +269,6 @@ h2 {
     transform: scale(1.05);
   }
   
-
-/* Cart Container */
 #cart-items {
     max-width: 600px;
     margin: 20px auto;
@@ -279,9 +277,6 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
-  
-  /* Individual Cart Item */
-  /* Cart Container */
 #cart-items {
     max-width: 650px;
     margin: 20px auto;
@@ -290,8 +285,7 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
-  
-  /* Individual Cart Item */
+
   .cart-item {
     display: flex;
     align-items: center;
@@ -309,7 +303,7 @@ h2 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
   
-  /* Product Image */
+ 
   .cart-item img {
     width: 75px;
     height: 75px;
@@ -318,7 +312,6 @@ h2 {
     border: 1px solid #ccc;
   }
   
-  /* Product Details */
   .cart-item h3 {
     font-size: 16px;
     color: #333;
@@ -333,7 +326,7 @@ h2 {
     font-weight: bold;
   }
   
-  /* Quantity Controls */
+  
   .quantity-controls {
     display: flex;
     align-items: center;
@@ -344,11 +337,11 @@ h2 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
-  /* Buttons */
+ 
   .quantity-controls button {
     background-color: #ddd;
     border: none;
-    padding: 5px 8px;
+    padding: 5px 7px;
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
@@ -365,7 +358,7 @@ h2 {
     transform: scale(1.1);
   }
   
-  /* Input Box */
+ 
   .quantity-controls input {
     width: 30px;
     height: 25px;
@@ -377,7 +370,7 @@ h2 {
     background: #fff;
   }
   
-  /* Remove Button */
+ 
   .remove-btn {
     background: #ff4d4d;
     color: white;
@@ -394,7 +387,7 @@ h2 {
     transform: scale(1.05);
   }
   
-  /* Cart Total */
+  
   .cart-total {
     text-align: right;
     margin-top: 20px;
