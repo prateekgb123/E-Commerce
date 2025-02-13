@@ -255,20 +255,20 @@ function showCategoryDetails(category) {
 function addToCart(productId) {
     const product = findProductById(productId);
     if (product) {
-        // Check if the product already exists in the cart
-        const existingItem = cart.find(item => item.id === productId);
-        if (existingItem) {
-            // If it exists, increase the quantity
-            existingItem.quantity++;
-        } else {
-            // Otherwise, add the product with quantity 1
-            cart.push({ ...product, quantity: 1 });
-        }
-        updateCartCount();
-        displayCart(); 
-        alert(`${product.name} added to cart!`);
+      // Check if the product already exists in the cart
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        // If it exists, increase the quantity
+        existingItem.quantity++;
+      } else {
+        // Otherwise, add the product with quantity 1
+        cart.push({ ...product, quantity: 1 });
+      }
+      updateCartCount();
+      displayCart(); 
+      alert(`${product.name} added to cart!`);
     }
-}
+  }
 
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
@@ -287,7 +287,12 @@ function displayCart() {
                 <img src="${item.image}" alt="${item.name}">
                 <h3>${item.name}</h3>
                 <p>₹${item.price}</p>
-                <p>Quantity: ${item.quantity}</p> 
+                <div class="quantity-controls">
+                    <button onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                    <input type="number" min="1" value="${item.quantity}" 
+                           oninput="updateCartItemQuantity(${item.id}, this.value)">
+                    <button onclick="updateCartItemQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                </div>
                 <button onclick="removeFromCart(${cart.indexOf(item)})" class="remove-btn">Remove</button>
             </div>
         `).join('');
@@ -301,6 +306,19 @@ function displayCart() {
     }
 }
 
+function updateCartItemQuantity(productId, newQuantity) {
+    const itemIndex = cart.findIndex(item => item.id === productId);
+    if (itemIndex !== -1) {
+      if (newQuantity === 0) {
+        // Remove item if quantity is set to 0
+        cart.splice(itemIndex, 1); 
+      } else {
+        cart[itemIndex].quantity = newQuantity; 
+      }
+      updateCartCount();
+      displayCart();
+    }
+  }
 function findProductById(productId) {
     return Object.values(categoryData).flat().find(item => item.id === productId);
 }
@@ -308,7 +326,7 @@ function removeFromCart(index) {
     cart.splice(index, 1); 
     updateCartCount(); 
     displayCart(); 
-}
+  }
 
 function displayOrders() {
     const ordersContainer = document.getElementById('orders');
