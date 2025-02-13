@@ -253,14 +253,23 @@ function showCategoryDetails(category) {
     }
 }
 function addToCart(productId) {
-    const product = Object.values(categoryData).flat().find(item => item.id === productId);
+    const product = findProductById(productId);
     if (product) {
-        cart.push(product);
+        // Check if the product already exists in the cart
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+            // If it exists, increase the quantity
+            existingItem.quantity++;
+        } else {
+            // Otherwise, add the product with quantity 1
+            cart.push({ ...product, quantity: 1 });
+        }
         updateCartCount();
         displayCart(); 
         alert(`${product.name} added to cart!`);
     }
 }
+
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
     if (cartCount) {
@@ -268,19 +277,21 @@ function updateCartCount() {
     }
 }
 function calculateCartTotal() {
-    return cart.reduce((sum, item) => sum + item.price, 0);
+    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0); 
 }
 function displayCart() {
     const cartContainer = document.getElementById('cart-items');
     if (cartContainer) {
-        cartContainer.innerHTML = cart.map((item, index) => `
+        cartContainer.innerHTML = cart.map((item) => `
             <div class="cart-item">
                 <img src="${item.image}" alt="${item.name}">
                 <h3>${item.name}</h3>
                 <p>₹${item.price}</p>
-                <button onclick="removeFromCart(${index})" class="remove-btn">Remove</button>
+                <p>Quantity: ${item.quantity}</p> 
+                <button onclick="removeFromCart(${cart.indexOf(item)})" class="remove-btn">Remove</button>
             </div>
         `).join('');
+
         const cartTotal = calculateCartTotal();
         cartContainer.innerHTML += `
             <div class="cart-total">
@@ -290,6 +301,9 @@ function displayCart() {
     }
 }
 
+function findProductById(productId) {
+    return Object.values(categoryData).flat().find(item => item.id === productId);
+}
 function removeFromCart(index) {
     cart.splice(index, 1); 
     updateCartCount(); 
@@ -316,8 +330,8 @@ function displayOrders() {
                         <img src="${item.image}" alt="${item.name}" class="order-item-image">
                         <div class="order-item-details">
                             <h4>${item.name}</h4>
-                            <p>Quantity: ${item.quantity}</p>
-                            <p>Price: ₹${item.price * item.quantity}</p>
+                            <p>Quantity: ${item.quantity}</p> 
+                            <p>Price: ₹${item.price * item.quantity}</p> 
                         </div>
                     </div>
                 `).join('')}
@@ -365,7 +379,7 @@ function checkout() {
             name: item.name,
             image: item.image,
             price: item.price,
-            quantity: 1 
+            quantity:item.quantity 
         })),
         total: calculateCartTotal(),
     };
