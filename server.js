@@ -58,6 +58,55 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
     res.json({ message: "Login successful", token });
 });
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
 
+    if (token == null) return res.sendStatus(401); // If no token, return unauthorized
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403); // If token is invalid, return forbidden
+        req.user = user; 
+        next(); // Pass the execution to the next middleware
+    });
+}
+app.post('/checkout', authenticateToken, async (req, res) => {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    const token = localStorage.getItem('token'); 
+
+    if (!token) {
+        alert("Please login to checkout.");
+        window.location.href = 'sign.html'; 
+        return;
+    }
+
+    const order = {
+        id: `ORD${Math.floor(1000 + Math.random() * 9000)}`,
+        date: new Date().toLocaleDateString(),
+        status: "Pending",
+        items: cart.map(item => ({
+            name: item.name,
+            image: item.image,
+            price: item.price,
+            quantity: 1 
+        })),
+        total: calculateCartTotal(),
+    };
+
+    orders.push(order);
+    cart.length = 0; 
+    updateCartCount();
+    displayCart();
+    alert("Order placed successfully!");
+
+   
+    if (document.getElementById('account-tab').classList.contains('active')) {
+        displayOrders();
+    }
+});
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

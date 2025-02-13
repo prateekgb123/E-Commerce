@@ -349,6 +349,14 @@ function checkout() {
         return;
     }
 
+    const token = localStorage.getItem('token'); 
+
+    if (!token) {
+        alert("Please login to checkout.");
+        window.location.href = 'sign.html'; 
+        return;
+    }
+
     const order = {
         id: `ORD${Math.floor(1000 + Math.random() * 9000)}`,
         date: new Date().toLocaleDateString(),
