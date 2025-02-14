@@ -585,7 +585,7 @@ footer a:hover {
     color: #333;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
     header {
         padding: 15px 20px;
@@ -599,7 +599,9 @@ footer a:hover {
         margin: 0 10px;
         font-size: 16px;
     }
-
+    header .search-container {
+        display: none; 
+    }
     header .search-container input {
         width: 200px;
     }
@@ -699,7 +701,9 @@ footer a:hover {
         margin: 0 5px;
         font-size: 14px;
     }
-
+    header .search-container {
+        display: none; 
+    }
     header .search-container input {
         width: 150px;
     }
