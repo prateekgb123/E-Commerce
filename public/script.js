@@ -230,19 +230,21 @@ function showCategoryDetails(category) {
     const categoryDetails = document.getElementById("category-details");
     categoryDetails.style.display = "block";
     categoryDetails.innerHTML = `
+    <div class="category-header">
         <button id="back-to-home" class="back-to-home-button">Back to Home</button>
-        <h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-        <div class="category-products">
-            ${categoryData[category].map(product => `
-                <div class="product">
-                    <h2>${product.name}</h2>
-                    <img src="${product.image}" alt="${product.name}">
-                    <p>₹${product.price}</p>
-                    <button onclick="addToCart(${product.id})">Add to Cart</button>
-                </div>
-            `).join('')}
-        </div>
-    `;
+        <h2 class="category-heading">${category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+    </div>
+    <div class="category-products">
+        ${categoryData[category].map(product => `
+            <div class="product">
+                <h2>${product.name}</h2>
+                <img src="${product.image}" alt="${product.name}">
+                <p>₹${product.price}</p>
+                <button onclick="addToCart(${product.id})">Add to Cart</button>
+            </div>
+        `).join('')}
+    </div>
+`;
     const backButton = document.getElementById("back-to-home");
     if (backButton) {
         backButton.addEventListener("click", () => {
