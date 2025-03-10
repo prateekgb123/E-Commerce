@@ -247,8 +247,13 @@ function showCategoryDetails(category) {
     if (backButton) {
         backButton.addEventListener("click", () => {
             categoryDetails.style.display = "none";
+            document.getElementById('shop').style.display = 'block';
+            document.getElementById('pro').style.display = 'block';
+            
             document.querySelector(".categories-grid").style.display = "grid";
-            document.getElementById('product-list').style.display = "block";
+            document.getElementById('product-list').style.display = "flex";
+            document.getElementById('product-list').style.flexDirection = "row";
+
         });
     }
 }
