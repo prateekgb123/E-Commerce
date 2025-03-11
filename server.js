@@ -5,6 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Razorpay = require('razorpay');
 
 const app = express();
 require("dotenv").config();
@@ -32,7 +33,6 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
-
 app.post("/signup", async (req, res) => {
     const { username, email, password } = req.body;
     
@@ -46,7 +46,6 @@ app.post("/signup", async (req, res) => {
     res.json({ message: "User registered successfully!" });
 });
 
-
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -58,6 +57,7 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
     res.json({ message: "Login successful", token });
 });
+
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -70,43 +70,46 @@ function authenticateToken(req, res, next) {
         next(); 
     });
 }
-app.post('/checkout', authenticateToken, async (req, res) => {
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
 
-    const token = localStorage.getItem('token'); 
+// Razorpay instance
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 
-    if (!token) {
-        alert("Please login to checkout.");
-        window.location.href = 'sign.html'; 
-        return;
-    }
+// Endpoint to create an order
+app.post('/create-order', authenticateToken, async (req, res) => {
+    const amount = req.body.amount;
+    const currency = 'INR';
 
-    const order = {
-        id: `ORD${Math.floor(1000 + Math.random() * 9000)}`,
-        date: new Date().toLocaleDateString(),
-        status: "Pending",
-        items: cart.map(item => ({
-            name: item.name,
-            image: item.image,
-            price: item.price,
-            quantity: 1 
-        })),
-        total: calculateCartTotal(),
+    const options = {
+        amount: amount * 100, // amount in the smallest currency unit
+        currency,
+        receipt: `receipt_order_${Math.floor(Math.random() * 1000000)}`,
+        payment_capture: 1,
     };
 
-    orders.push(order);
-    cart.length = 0; 
-    updateCartCount();
-    displayCart();
-    alert("Order placed successfully!");
-
-   
-    if (document.getElementById('account-tab').classList.contains('active')) {
-        displayOrders();
+    try {
+        const response = await razorpay.orders.create(options);
+        res.json({
+            id: response.id,
+            currency: response.currency,
+            amount: response.amount,
+        });
+    } catch (error) {
+        res.status(500).send(error);
     }
 });
+
+// Endpoint to handle order confirmation
+app.post('/confirm-order', authenticateToken, async (req, res) => {
+    const { order, payment_id } = req.body;
+
+    // Save the order details to the database (not implemented in this example)
+    // Clear the cart (also not implemented in this example)
+
+    res.json({ message: "Order confirmed", order });
+});
+
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

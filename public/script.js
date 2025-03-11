@@ -139,7 +139,6 @@ const categoryData = {
             { name: "Rice Cooker", image: "homeappliances/ricecooker.webp", price: 2500 },
             { name: "Chimney", image: "homeappliances/chimney.webp", price: 15000 }
     ],
-    
 };
 let productIdCounter = 1;
 Object.keys(categoryData).forEach(category => {
@@ -378,7 +377,8 @@ function showSection(sectionId) {
         displayProducts(products);
     }
 }
-function checkout() {
+
+async function checkout() {
     if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
@@ -392,27 +392,77 @@ function checkout() {
         return;
     }
 
-    const order = {
-        id: `ORD${Math.floor(1000 + Math.random() * 9000)}`,
-        date: new Date().toLocaleDateString(),
-        status: "Pending",
-        items: cart.map(item => ({
-            name: item.name,
-            image: item.image,
-            price: item.price,
-            quantity:item.quantity 
-        })),
-        total: calculateCartTotal(),
-    };
+    const amount = calculateCartTotal();
 
-    orders.push(order);
-    cart.length = 0; 
-    updateCartCount();
-    displayCart();
-    alert("Order placed successfully!");
+    try {
+        const response = await fetch('http://localhost:5000/create-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ amount })
+        });
 
-   
-    if (document.getElementById('account-tab').classList.contains('active')) {
-        displayOrders();
+        const data = await response.json();
+        
+        const options = {
+            key: 'rzp_test_gwpTQd9N3auJ7D', // Replace with your Razorpay test key
+            amount: data.amount,
+            currency: data.currency,
+            name: 'Shopping Cart',
+            description: 'Test Transaction',
+            order_id: data.id,
+            handler: async function (response) {
+                const order = {
+                    id: `ORD${Math.floor(1000 + Math.random() * 9000)}`,
+                    date: new Date().toLocaleDateString(),
+                    status: "Pending",
+                    items: cart.map(item => ({
+                        name: item.name,
+                        image: item.image,
+                        price: item.price,
+                        quantity: item.quantity 
+                    })),
+                    total: calculateCartTotal(),
+                    payment_id: response.razorpay_payment_id
+                };
+
+                // Confirm the order with the backend
+                await fetch('http://localhost:5000/confirm-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ order, payment_id: response.razorpay_payment_id })
+                });
+
+                // Update the frontend
+                orders.push(order);
+                cart.length = 0; 
+                updateCartCount();
+                displayCart();
+                alert("Order placed successfully!");
+                if (document.getElementById('account-tab').classList.contains('active')) {
+                    displayOrders();
+                }
+            },
+            prefill: {
+                name: 'Your Name',
+                email: 'your.email@example.com',
+                contact: '9999999999'
+            },
+            theme: {
+                color: '#F37254'
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+
+    } catch (error) {
+        console.error('Error creating order:', error);
+        alert('Failed to create order. Please try again.');
     }
 }
