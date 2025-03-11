@@ -71,19 +71,19 @@ function authenticateToken(req, res, next) {
     });
 }
 
-// Razorpay instance
+
 const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID,
     key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
-// Endpoint to create an order
+
 app.post('/create-order', authenticateToken, async (req, res) => {
     const amount = req.body.amount;
     const currency = 'INR';
 
     const options = {
-        amount: amount * 100, // amount in the smallest currency unit
+        amount: amount * 100, 
         currency,
         receipt: `receipt_order_${Math.floor(Math.random() * 1000000)}`,
         payment_capture: 1,
@@ -101,13 +101,9 @@ app.post('/create-order', authenticateToken, async (req, res) => {
     }
 });
 
-// Endpoint to handle order confirmation
+
 app.post('/confirm-order', authenticateToken, async (req, res) => {
     const { order, payment_id } = req.body;
-
-    // Save the order details to the database (not implemented in this example)
-    // Clear the cart (also not implemented in this example)
-
     res.json({ message: "Order confirmed", order });
 });
 
