@@ -395,7 +395,7 @@ async function checkout() {
     const amount = calculateCartTotal();
 
     try {
-        const response = await fetch('http://localhost:5000/create-order', {
+        const response = await fetch('https://e-commerce-zyfc.onrender.com/create-order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -407,7 +407,7 @@ async function checkout() {
         const data = await response.json();
         
         const options = {
-            key: 'rzp_test_gwpTQd9N3auJ7D', // Replace with your Razorpay test key
+            key: 'rzp_test_gwpTQd9N3auJ7D',
             amount: data.amount,
             currency: data.currency,
             name: 'Shopping Cart',
@@ -428,7 +428,7 @@ async function checkout() {
                     payment_id: response.razorpay_payment_id
                 };
 
-                // Confirm the order with the backend
+               
                 await fetch('http://localhost:5000/confirm-order', {
                     method: 'POST',
                     headers: {
@@ -438,7 +438,7 @@ async function checkout() {
                     body: JSON.stringify({ order, payment_id: response.razorpay_payment_id })
                 });
 
-                // Update the frontend
+                
                 orders.push(order);
                 cart.length = 0; 
                 updateCartCount();
