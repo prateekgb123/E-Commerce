@@ -429,7 +429,7 @@ async function checkout() {
                 };
 
                
-                await fetch('http://localhost:5000/confirm-order', {
+                await fetch('https://e-commerce-zyfc.onrender.com/confirm-order', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
