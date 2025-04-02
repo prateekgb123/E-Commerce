@@ -216,46 +216,6 @@ h2 {
     gap: 20px;
     width: 100%; 
 }
-
-.product {
-    flex: 1 1 calc(22% - 20px);
-    box-sizing: border-box; 
-    text-align: center; 
-    border: 1px solid #ddd; 
-    padding: 20px; 
-    border-radius: 8px; 
-}
-
-.product img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px; 
-}
-
-.product h3 {
-    font-size: 18px; 
-    margin: 15px 0;
-}
-
-.product p {
-    font-size: 15px;
-    color: #555; 
-}
-
-.product button {
-    background-color: #4a90e2; 
-    color: white;
-    padding: 12px; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 15px; 
-}
-
-.product button:hover {
-    background-color: #357abd; 
-}
-
 #cart {
     background-color: #fff;
     border-radius: 8px;
@@ -706,63 +666,6 @@ header .search-container input {
     margin: 0;
     color: #000000;
 }
-.product {
-    width: calc(33.33% - 20px); 
-    background-color: #f9f9f9;
-    border: 1px solid #ddd; 
-    border-radius: 10px;
-    text-align: center;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    height: auto; 
-    min-height: 380px; 
-}
-
-.product img {
-    width: 100%;
-    height: 180px; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    margin-bottom: 10px;
-}
-
-.product h2 {
-    font-size: 1.2em;
-    margin: 10px 0;
-    color: #333;
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
-}
-
-.product p {
-    font-size: 1em;
-    margin: 5px 0;
-    color: #555;
-}
-
-.product button {
-    margin-top: 10px; 
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background-color 0.3s ease; 
-}
-
-.product button:hover {
-    background-color: #0056b3;
-}
-
 main {
     padding: 40px;
     flex: 1; 
@@ -783,45 +686,6 @@ h2 {
     flex-wrap: wrap; 
     gap: 20px;
     width: 100%; 
-}
-
-.product {
-    flex: 1 1 calc(22% - 20px);
-    box-sizing: border-box; 
-    text-align: center; 
-    border: 1px solid #ddd; 
-    padding: 20px; 
-    border-radius: 8px; 
-}
-
-.product img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px; 
-}
-
-.product h3 {
-    font-size: 1.2rem; 
-    margin: 15px 0;
-}
-
-.product p {
-    font-size: 1rem;
-    color: #555; 
-}
-
-.product button {
-    background-color: #4a90e2; 
-    color: white;
-    padding: 12px; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem; 
-}
-
-.product button:hover {
-    background-color: #357abd; 
 }
 
 #cart {
@@ -1456,4 +1320,3 @@ footer a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
