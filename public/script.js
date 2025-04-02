@@ -287,9 +287,9 @@ function displayCart() {
     if (cartContainer) {
         cartContainer.innerHTML = cart.map((item) => `
             <div class="cart-item">
-                <img src="${item.image}" alt="${item.name}">
-                <h3>${item.name}</h3>
-                <p>₹${item.price}</p>
+                <img id="img1" src="${item.image}" alt="${item.name}">
+                <h3 id="name1">${item.name}</h3>
+                <p id="price1">₹${item.price}</p>
                 <div class="quantity-controls">
                     <button onclick="updateCartItemQuantity(${item.id}, ${item.quantity - 1})">-</button>
                     <input type="number" min="1" value="${item.quantity}" 
