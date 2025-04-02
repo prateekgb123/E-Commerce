@@ -235,7 +235,7 @@ function showCategoryDetails(category) {
     </div>
     <div class="category-products">
         ${categoryData[category].map(product => `
-            <div class="product">
+            <div class="product1">
                 <h2>${product.name}</h2>
                 <img src="${product.image}" alt="${product.name}">
                 <p>₹${product.price}</p>

@@ -128,6 +128,21 @@ header .search-container input {
     height: auto; 
     min-height: 380px; 
 }
+.product1 {
+    width: calc(33.33% - 20px); 
+    background-color: #f9f9f9;
+    border: 1px solid #ddd; 
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: auto; 
+    min-height: 380px; 
+}
 
 .product img {
     width: 100%;
@@ -136,7 +151,13 @@ header .search-container input {
     border-radius: 8px; 
     margin-bottom: 10px;
 }
-
+.product1 img {
+    width: 100%;
+    height: 180px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    margin-bottom: 10px;
+}
 .product h2 {
     font-size: 1.2em;
     margin: 10px 0;
@@ -146,8 +167,21 @@ header .search-container input {
     text-overflow: ellipsis; 
     white-space: nowrap; 
 }
-
+.product1 h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #333;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
 .product p {
+    font-size: 1em;
+    margin: 5px 0;
+    color: #555;
+}
+.product1 p {
     font-size: 1em;
     margin: 5px 0;
     color: #555;
@@ -165,11 +199,24 @@ header .search-container input {
     font-weight: 600;
     transition: background-color 0.3s ease; 
 }
-
+.product1 button {
+    margin-top: 10px; 
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease; 
+}
 .product button:hover {
     background-color: #0056b3;
 }
-
+.product1 button:hover {
+    background-color: #0056b3;
+}
 main {
     padding: 40px;
     flex: 1; 
@@ -503,7 +550,7 @@ footer a:hover {
     border-radius: 5px;
     cursor: pointer;
     position: relative;
-    right: 550px;
+    right: 100px;
     bottom: 45px;
 }
 
