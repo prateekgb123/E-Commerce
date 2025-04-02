@@ -108,5 +108,5 @@ app.post('/confirm-order', authenticateToken, async (req, res) => {
     res.json({ message: "Order confirmed", order });
 });
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+app.listen(PORT, () => console.log(`Server running on https://e-commerce-zyfc.onrender.com`));
