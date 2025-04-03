@@ -30,8 +30,8 @@ header {
     color: #161717;
     padding: 15px 40px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap:175px;
 }
 
 header .logo {
@@ -184,7 +184,7 @@ header .search-container input {
 .product1 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensures button stays at bottom */
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     padding: 10px;
@@ -195,9 +195,9 @@ header .search-container input {
 
 .product1 img {
     width: 100%;
-    height: auto; /* Allows image to scale naturally */
-    max-height: 200px; /* Adjust to prevent overly large images */
-    object-fit: contain; /* Ensures full image is visible */
+    height: auto; 
+    max-height: 200px; 
+    object-fit: contain; 
 }
 
 .product1 button {
@@ -587,6 +587,14 @@ footer a:hover {
     margin-top: 20px;
 }
 @media (max-width: 480px) {
+    header {
+        background-color: #b4dafd;
+        color: #161717;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap:50px;
+    }
     header .logo h1 {
         font-size: 1.2rem;
     }
