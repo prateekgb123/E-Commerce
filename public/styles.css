@@ -17,21 +17,8 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
-}
-#product-list {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 20px;
-    width: 100%; 
-    justify-content: space-between;
-    margin: 0;
-    padding: 0;
-}
+
+
 #home h2 {
     text-align: center; 
     margin: 0 auto; 
@@ -87,11 +74,14 @@ header .search-container input {
     text-align: center;
     padding: 20px;
 }
-
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
 .category {
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -116,6 +106,15 @@ header .search-container input {
     margin: 0;
     color: #000000;
 }
+#product-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    width: 100%; 
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
 .product {
     display: flex;
     width: calc(25% - 15px); 
@@ -127,8 +126,7 @@ header .search-container input {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     flex-direction: column;
     justify-content: space-between; 
-    height: auto; 
-    min-height: 380px;
+    height:300px;
 }
 
 
@@ -626,6 +624,8 @@ footer a:hover {
 
     .product {
         flex: 1 1 calc(50% - 5px);
+        max-width: 100%; 
+        height: auto; 
     }
  
     #cart {
