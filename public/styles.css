@@ -593,7 +593,7 @@ footer a:hover {
         padding: 10px 20px;
         display: flex;
         align-items: center;
-        gap:50px;
+        gap:60px;
     }
     header .logo h1 {
         font-size: 1.2rem;
