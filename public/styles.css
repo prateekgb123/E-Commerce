@@ -1256,42 +1256,60 @@ footer a:hover {
     .order-item {
         flex-basis: 100%;
     }
-    .cart-item {
-        flex-direction: row;
+    .cart-item {  
+        display: flex;
         align-items: center;
-        text-align: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 5px; /* Slightly increased gap for better spacing */
+        padding: 5px; /* Added padding for proper alignment */
     }
+
     .cart-item img {
-        width: 60px;
-        height: 60px;
+        width: 40px; /* Slightly smaller */
+        height: 40px;
         border-radius: 3px;
     }
+
     .cart-item h3 {
-        margin: 0 0 5px 0;
-        font-size: 0.7rem;
+        margin: 0;
+        font-size: 0.6rem;
+        white-space: nowrap; /* Prevents text from wrapping */
+        text-align: left;
     }
 
     .cart-item p {
-        margin-top: 5px;
-        font-size: 14px;
+        margin: 0;
+        font-size: 11px; /* Slightly reduced */
+        white-space: nowrap; /* Ensures single line */
     }
 
     .quantity-controls {
-        margin-top: 5px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 2px;
     }
 
     .quantity-controls button {
-        font-size: 10px; 
-        padding: 2px 4px; 
+        font-size: 8px; /* Reduced size */
+        padding: 1px 3px; 
     }
+
     .quantity-controls input {
-        width: 20px;
-        height: 15px;
-        font-size: 10px;
+        width: 15px; /* Reduced width */
+        height: 12px; /* Reduced height */
+        font-size: 8px; /* Reduced font */
+        text-align: center;
     }
+
     .remove-btn {
-        margin-top: 5px;
-        width: 90px;
+        width: auto;
+        max-width: 65px; /* Slightly reduced */
+        font-size: 9px; /* Slightly smaller */
+        padding: 2px 5px; /* Adjusted padding */
+        white-space: nowrap;
+        text-align: center;
     }
     .category-products {
         grid-template-columns: repeat(2, 1fr);
