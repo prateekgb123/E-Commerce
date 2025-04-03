@@ -17,7 +17,21 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+#product-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    width: 100%; 
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
 #home h2 {
     text-align: center; 
     margin: 0 auto; 
@@ -82,6 +96,7 @@ header .search-container input {
     border: 1px solid #ddd;
     border-radius: 10px;
     transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
 }
 
 .category:hover {
@@ -90,11 +105,9 @@ header .search-container input {
 }
 
 .category img {
-    width: 300px; 
+    width: 100%;
     height: 200px; 
-    object-fit: cover; 
-    border-radius: 10px;
-    margin-bottom: 10px;
+    border-radius: 8px;
 }
 
 .category h3 {
@@ -102,17 +115,6 @@ header .search-container input {
     font-weight: 600;
     margin: 0;
     color: #000000;
-}
-
-
-#product-list {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 20px;
-    width: 100%; 
-    justify-content: space-between;
-    margin: 0;
-    padding: 0;
 }
 .product {
     display: flex;
@@ -128,6 +130,8 @@ header .search-container input {
     height: auto; 
     min-height: 380px;
 }
+
+
 .product img {
     width: 100%;
     height: auto;
@@ -135,6 +139,7 @@ header .search-container input {
     object-fit: contain;
     border-radius: 5px;
 }
+
 .product h2 {
     font-size: 1.2em;
     margin: 10px 0;
@@ -143,6 +148,12 @@ header .search-container input {
     overflow: hidden;
     text-overflow: ellipsis; 
     white-space: nowrap; 
+}
+
+.product p {
+    font-size: 1em;
+    margin: 5px 0;
+    color: #555;
 }
 
 .product button {
@@ -157,15 +168,10 @@ header .search-container input {
     font-weight: 600;
     transition: background-color 0.3s ease; 
 }
-.product p {
-    font-size: 1em;
-    margin: 5px 0;
-    color: #555;
-}
+
 .product button:hover {
     background-color: #0056b3;
 }
-
 .category-products {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -201,11 +207,10 @@ header .search-container input {
 .product1 button:hover {
     background-color: #0056b3;
 }
-main {
-    padding: 10px;
-    flex: 1; 
+main{
+    flex:1;
+    padding:10px;    
 }
-
 #pro {
     font-size: 30px;
     font-weight: 600;
@@ -486,7 +491,7 @@ footer a:hover {
     border-radius: 5px;
     cursor: pointer;
     position: relative;
-    right: 100px;
+    right: 550px;
     bottom: 45px;
 }
 
@@ -539,12 +544,7 @@ footer a:hover {
     font-size: 14px;
     color: #333;
 }
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 20px;
-}
+
 button {
     background-color: #27ae60;
     color: #fff;
@@ -577,173 +577,6 @@ footer a:hover {
 #orders {
     margin-top: 20px;
 }
-@media (min-width: 768px) {
-    header .logo h1 {
-        font-size: 1.5rem;
-    }
-
-    header nav a {
-        margin: 0 0.5rem;
-        font-size: 0.9rem;
-    }
-
-    header .search-container {
-        display: block;
-    }
-
-    .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .category img {
-        height: 100px;
-    }
-
-    .category h3 {
-        font-size: 1.1rem;
-    }
-
-    .product img {
-        height: 120px;
-    }
-
-    .product h2 {
-        font-size: 1rem;
-    }
-
-    .product p {
-        font-size: 0.9rem;
-    }
-
-    .product button {
-        font-size: 0.9rem;
-    }
-
-    #product-list {
-        gap: 15px;
-    }
-
-    .product {
-        flex: 1 1 calc(33.33% - 10px);
-    }
-
-    #cart {
-        padding: 10px;
-    }
-
-    .cart-total {
-        font-size: 1.2rem;
-    }
-
-    #account {
-        padding: 10px;
-    }
-
-    .order-item {
-        padding: 5px 0;
-    }
-
-    footer {
-        padding: 20px 4%;
-    }
-
-    .footer-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .footer-social a {
-        margin: 0 5px;
-        font-size: 14px;
-    }
-
-    .footer-bottom {
-        font-size: 10px;
-    }
-
-    .category-header {
-        padding: 10px;
-    }
-
-    .category-heading {
-        font-size: 2em;
-    }
-
-    .back-to-home-button {
-        font-size: 12px;
-        padding: 7px 12px;
-        right: 200px;
-        bottom: 20px;
-    }
-
-    .order-items {
-        gap: 10px;
-    }
-
-    .order-item {
-        flex-basis: 48%;
-    }
-
-    .cart-item {  
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        gap: 10px;
-        padding: 10px;
-    }
-
-    .cart-item img {
-        width: 60px;
-        height: 60px;
-        border-radius: 5px;
-    }
-
-    .cart-item h3 {
-        margin: 0;
-        font-size: 0.8rem;
-        white-space: nowrap;
-        text-align: left;
-    }
-
-    .cart-item p {
-        margin: 0;
-        font-size: 12px;
-        white-space: nowrap;
-    }
-
-    .quantity-controls {
-        margin: 0;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .quantity-controls button {
-        font-size: 10px;
-        padding: 3px 6px;
-    }
-
-    .quantity-controls input {
-        width: 20px;
-        height: 16px;
-        font-size: 10px;
-        text-align: center;
-    }
-
-    .remove-btn {
-        width: auto;
-        max-width: 80px;
-        font-size: 11px;
-        padding: 3px 6px;
-        white-space: nowrap;
-        text-align: center;
-    }
-
-    .category-products {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
 @media (max-width: 480px) {
     header .logo h1 {
         font-size: 1.2rem;
@@ -760,18 +593,22 @@ footer a:hover {
 
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap:10px;
     }
-
+    .category{
+        padding: 5px;
+    }
     .category img {
-        height: 70px;
+        height: 120px;
     }
 
     .category h3 {
-        font-size: 0.9rem;
+        font-size: 14px;
     }
 
     .product img {
         height: 80px;
+        object-fit: contain;
     }
 
     .product h2 {
