@@ -97,6 +97,7 @@ header .search-container input {
 .category img {
     width: 100%;
     height: 200px; 
+    padding :0px 15px;
     border-radius: 8px;
 }
 
@@ -122,6 +123,7 @@ header .search-container input {
     border: 1px solid #ddd; 
     border-radius: 10px;
     text-align: center;
+    align-items: center;
     padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     flex-direction: column;
@@ -155,6 +157,7 @@ header .search-container input {
 }
 
 .product button {
+    width:130px;
     margin-top: 10px; 
     padding: 10px 20px;
     background-color: #007bff;
@@ -172,27 +175,35 @@ header .search-container input {
 }
 .category-products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; 
+    justify-content: center;
 }
+
+
 .product1 {
-    border: 1px solid #ddd;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures button stays at bottom */
+    align-items: center;
     text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .product1 img {
     width: 100%;
-    height: 180px; 
-    object-fit: contain; 
-    border-radius: 8px; 
-    margin-bottom: 10px;
+    height: auto; /* Allows image to scale naturally */
+    max-height: 200px; /* Adjust to prevent overly large images */
+    object-fit: contain; /* Ensures full image is visible */
 }
+
 .product1 button {
-    margin-top: 10px; 
-    padding: 10px 20px;
+    width:130px;
+    margin-top:auto; 
+    padding: 8px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -627,6 +638,10 @@ footer a:hover {
         max-width: 100%; 
         height: auto; 
     }
+    .product img {
+        height: 80px;
+        object-fit: contain;
+    }
  
     #cart {
         padding: 5px;
@@ -669,7 +684,7 @@ footer a:hover {
     .back-to-home-button {
         font-size: 10px;
         padding: 5px 8px;
-        right: 150px;
+        right: 160px;
         bottom: 15px;
     }
 
@@ -737,5 +752,9 @@ footer a:hover {
     }
     .category-products {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .product1 {
+        width: 90%; 
     }
 }
