@@ -28,11 +28,20 @@ mongoose.connect(process.env.MONGO_URI, {
 
 const UserSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
-    email: { type: String, unique: true, required: true },
+    email: { type: String, required: true },
     password: { type: String, required: true },
 }, { collection: "user" });
 
 const User = mongoose.model("User", UserSchema);
+const OrderSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    orderId: { type: String, required: true },
+    paymentId: { type: String, required: true },
+    amount: { type: Number, required: true },
+    createdAt: { type: Date, default: Date.now }
+}, { collection: "orders" });
+
+const Order = mongoose.model("Order", OrderSchema);
 
 app.post("/signup", async (req, res) => {
     try {
@@ -123,7 +132,37 @@ app.post('/create-order', authenticateToken, async (req, res) => {
 
 app.post('/confirm-order', authenticateToken, async (req, res) => {
     const { order, payment_id } = req.body;
-    res.json({ message: "Order confirmed", order });
+
+    if (!order || !payment_id) {
+        return res.status(400).json({ message: "Order and payment ID are required" });
+    }
+
+    try {
+        const newOrder = new Order({
+            userId: req.user.userId,
+            orderId: order.id,
+            paymentId: payment_id,
+            amount: order.amount / 100, 
+        });
+
+        await newOrder.save();
+
+        res.status(200).json({ message: "Order confirmed and saved", order });
+    } catch (err) {
+        console.error("Error saving order:", err);
+        res.status(500).json({ message: "Failed to save order" });
+    }
+});
+
+app.get('/order-history', authenticateToken, async (req, res) => {
+    try {
+        const orders = await Order.find({ userId: req.user.userId }).sort({ createdAt: -1 });
+
+        res.status(200).json(orders);
+    } catch (err) {
+        console.error("Failed to fetch order history:", err);
+        res.status(500).json({ message: "Internal server error" });
+    }
 });
 
 const PORT =5000;
