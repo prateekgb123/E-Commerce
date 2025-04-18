@@ -271,7 +271,9 @@ function showCategoryDetails(category) {
             const productListContainer = document.getElementById('product-list');
             if (productListContainer) {
                 productListContainer.style.display = "grid"; 
-                productListContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))'; 
+                productListContainer.style.gridTemplateColumns = window.innerWidth <= 480 
+                    ? 'repeat(2, 1fr)' // 2 items per row for smaller screens
+                    : 'repeat(auto-fill, minmax(200px, 1fr))'; // Default layout for larger screens
                 productListContainer.style.gap = '16px'; 
                 productListContainer.style.padding = '16px'; 
                 productListContainer.style.justifyContent = 'center'; 
