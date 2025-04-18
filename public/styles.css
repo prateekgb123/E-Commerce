@@ -590,10 +590,10 @@ footer a:hover {
     header {
         background-color: #b4dafd;
         color: #161717;
-        padding: 10px 20px;
+        padding: 7px 10px;
         display: flex;
         align-items: center;
-        gap:60px;
+        gap:30px;
     }
     header .logo h1 {
         font-size: 1.2rem;
@@ -607,7 +607,10 @@ footer a:hover {
     header .search-container {
        display:none;
     }
-
+    #shop {
+        font-size: 18px;
+        font-weight: 300;
+    }
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
         gap:10px;
@@ -739,13 +742,13 @@ footer a:hover {
     }
 
     .quantity-controls button {
-        font-size: 8px; 
-        padding: 1px 3px; 
+        font-size: 8px;  
+        padding: 0.5px 1px;
     }
 
     .quantity-controls input {
-        width: 15px;
-        height: 12px;
+        width: 17px;
+        height: 17px;
         font-size: 8px;
         text-align: center;
     }
@@ -761,7 +764,10 @@ footer a:hover {
     .category-products {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+    #pro {
+        font-size: 20px;
+        font-weight: 300;
+    }
     .product1 {
         width: 90%; 
     }
