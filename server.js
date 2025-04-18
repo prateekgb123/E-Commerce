@@ -37,6 +37,7 @@ const User = mongoose.model("User", UserSchema);
 app.post("/signup", async (req, res) => {
     try {
         const { username, email, password } = req.body;
+
         if (!username || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
@@ -46,24 +47,21 @@ app.post("/signup", async (req, res) => {
             return res.status(400).json({ message: "Username already exists. Please log in." });
         }
 
+        const emailExists = await User.findOne({ email });
+        if (emailExists) {
+            return res.status(400).json({ message: "Email already registered" });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
 
-        res.json({ message: "Signup successful! Please log in." });
+        res.status(201).json({ message: "Signup successful! Please log in." });
+
     } catch (error) {
         console.error("Signup error:", error);
         res.status(500).json({ message: "Internal server error" });
-    }  const { username, email, password } = req.body;
-    
-    const userExists = await User.findOne({ username });
-    if (userExists) return res.status(400).json({ message: "Username already exists" });
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
-
-    await newUser.save();
-    res.json({ message: "User registered successfully!" });
+    }
 });
 
 app.post("/login", async (req, res) => {
@@ -75,7 +73,7 @@ app.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials." });
 
-    const token = jwt.sign({ userId: user._id, username: user.username }, JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "30d" });
     res.json({ token, username: user.username });
 });
 
