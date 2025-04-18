@@ -172,10 +172,12 @@ function setupEventListeners() {
         loadProducts();  
     });
     document.getElementById('cart-tab').addEventListener('click', () => {
+        hideCategoryDetails(); // Hide category details if visible
         showSection('cart');
         displayCart();
     });
     document.getElementById('account-tab').addEventListener('click', () => {
+        hideCategoryDetails(); // Hide category details if visible
         showSection('account');
         displayOrders();
     });
@@ -205,6 +207,20 @@ function setupEventListeners() {
             document.querySelector(".categories-grid").style.display = "grid";
             document.getElementById('product-list').style.display = "block";
         });
+    }
+}
+function hideCategoryDetails() {
+    const categoryDetails = document.getElementById('category-details');
+    if (categoryDetails) {
+        categoryDetails.style.display = 'none';
+    }
+    const categoriesGrid = document.querySelector(".categories-grid");
+    if (categoriesGrid) {
+        categoriesGrid.style.display = 'grid';
+    }
+    const productList = document.getElementById('product-list');
+    if (productList) {
+        productList.style.display = 'block';
     }
 }
 function handleSearch(event) {
@@ -361,21 +377,38 @@ function displayOrders() {
     `).join('');
 }
 
-
 function showSection(sectionId) {
-    document.getElementById('home').style.display = sectionId === 'home' ? 'block' : 'none';
-    document.getElementById('cart').style.display = sectionId === 'cart' ? 'block' : 'none';
-    document.getElementById('account').style.display = sectionId === 'account' ? 'block' : 'none';
+    // Hide all sections first
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('cart').style.display = 'none';
+    document.getElementById('account').style.display = 'none';
+
+    // Show the selected section
+    document.getElementById(sectionId).style.display = 'block';
+
+    // Update the active tab
     document.getElementById('home-tab').classList.toggle('active', sectionId === 'home');
     document.getElementById('cart-tab').classList.toggle('active', sectionId === 'cart');
     document.getElementById('account-tab').classList.toggle('active', sectionId === 'account');
-    const categoriesContainer = document.getElementById('categories'); 
+
+    // Show or hide category content (e.g., electronics, fashion) only when in the 'home' section
+    const categoriesContainer = document.getElementById('categories');
     if (categoriesContainer) {
         categoriesContainer.style.display = sectionId === 'home' ? 'block' : 'none';
     }
+
+    // Reload products when navigating back to the home section
     if (sectionId === 'home') {
-        displayProducts(products);
+        loadProducts(); // Ensure products are displayed properly
     }
+}
+// Function to display products for specific categories
+function displayCategoryProducts(category) {
+    // Replace with your actual category filtering and displaying logic
+    console.log(`Displaying products for category: ${category}`);
+    // Example of filtering products by category
+    const filteredProducts = products.filter(product => product.category === category);
+    displayProducts(filteredProducts); // Reuse the existing displayProducts function
 }
 
 async function checkout() {
