@@ -607,6 +607,9 @@ footer a:hover {
     header .search-container {
        display:none;
     }
+    #categories {
+        padding: 10px;
+    }
     #shop {
         font-size: 18px;
         font-weight: 300;
