@@ -172,12 +172,12 @@ function setupEventListeners() {
         loadProducts();  
     });
     document.getElementById('cart-tab').addEventListener('click', () => {
-        hideCategoryDetails(); // Hide category details if visible
+        hideCategoryDetails();
         showSection('cart');
         displayCart();
     });
     document.getElementById('account-tab').addEventListener('click', () => {
-        hideCategoryDetails(); // Hide category details if visible
+        hideCategoryDetails();
         showSection('account');
         displayOrders();
     });
@@ -266,11 +266,17 @@ function showCategoryDetails(category) {
             categoryDetails.style.display = "none";
             document.getElementById('shop').style.display = 'block';
             document.getElementById('pro').style.display = 'block';
-            
             document.querySelector(".categories-grid").style.display = "grid";
-            document.getElementById('product-list').style.display = "flex";
-            document.getElementById('product-list').style.flexDirection = "row";
 
+            const productListContainer = document.getElementById('product-list');
+            if (productListContainer) {
+                productListContainer.style.display = "grid"; 
+                productListContainer.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))'; 
+                productListContainer.style.gap = '16px'; 
+                productListContainer.style.padding = '16px'; 
+                productListContainer.style.justifyContent = 'center'; 
+            }
+            loadProducts(); 
         });
     }
 }
@@ -378,37 +384,42 @@ function displayOrders() {
 }
 
 function showSection(sectionId) {
-    // Hide all sections first
+    
     document.getElementById('home').style.display = 'none';
     document.getElementById('cart').style.display = 'none';
     document.getElementById('account').style.display = 'none';
 
-    // Show the selected section
+   
     document.getElementById(sectionId).style.display = 'block';
 
-    // Update the active tab
+    
     document.getElementById('home-tab').classList.toggle('active', sectionId === 'home');
     document.getElementById('cart-tab').classList.toggle('active', sectionId === 'cart');
     document.getElementById('account-tab').classList.toggle('active', sectionId === 'account');
 
-    // Show or hide category content (e.g., electronics, fashion) only when in the 'home' section
+   
     const categoriesContainer = document.getElementById('categories');
     if (categoriesContainer) {
         categoriesContainer.style.display = sectionId === 'home' ? 'block' : 'none';
     }
 
-    // Reload products when navigating back to the home section
+    
     if (sectionId === 'home') {
-        loadProducts(); // Ensure products are displayed properly
+        const productListContainer = document.getElementById('product-list');
+        if (productListContainer) {
+            productListContainer.style.display = 'grid'; 
+            productListContainer.style.flexDirection = ''; 
+        }
+        loadProducts(); 
     }
 }
-// Function to display products for specific categories
+
 function displayCategoryProducts(category) {
-    // Replace with your actual category filtering and displaying logic
+   
     console.log(`Displaying products for category: ${category}`);
-    // Example of filtering products by category
+  
     const filteredProducts = products.filter(product => product.category === category);
-    displayProducts(filteredProducts); // Reuse the existing displayProducts function
+    displayProducts(filteredProducts); 
 }
 
 async function checkout() {
