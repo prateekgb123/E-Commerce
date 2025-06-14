@@ -441,7 +441,7 @@ async function checkout() {
     const amount = calculateCartTotal();
 
     try {
-        const response = await fetch('https://e-commerce-zyfc.onrender.com/create-order', {
+        const response = await fetch('https://e-commerce-j29i.onrender.com/create-order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -475,7 +475,7 @@ async function checkout() {
                 };
 
                
-                await fetch('https://e-commerce-zyfc.onrender.com/confirm-order', {
+                await fetch('https://e-commerce-j29i.onrender.com/confirm-order', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
