@@ -577,23 +577,36 @@ footer a:hover {
     margin-top: 20px;
 }
 @media (max-width: 480px) {
-    header {
-        background-color: #b4dafd;
-        color: #161717;
-        padding: 7px 10px;
+     header {
+        padding: 10px;
         display: flex;
         align-items: center;
-        gap:35px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 10px;
     }
-    header .logo h1 {
-        font-size: 1.2rem;
+     header .logo h1 {
+        font-size: 1rem;
+        white-space: nowrap;
     }
-
-    header nav a {
-        margin: 0 0.25rem;
-        font-size: 0.7rem;
+        nav.navbar {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        flex-grow: 1;
+        justify-content: flex-end;
     }
-
+    nav.navbar a {
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+       #login-container {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+    }
     header .search-container {
        display:none;
     }
