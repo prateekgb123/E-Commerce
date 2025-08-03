@@ -26,41 +26,50 @@ body {
 }
 
 header {
-  background-color: #b4dafd;
-  color: #161717;
-  padding: 15px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* ensures login goes to right */
-  flex-wrap: wrap;
+    background-color: #b4dafd;
+    color: #161717;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
 }
-
 
 header .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 header .logo h1 {
-  font-size: 30px;
-  font-weight: 600;
+    font-size: 30px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 nav.navbar {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 nav.navbar a {
-  color: rgb(37, 34, 34);
-  text-decoration: none;
-  font-size: 18px;
+    color: rgb(37, 34, 34);
+    text-decoration: none;
+    font-size: 18px;
+    white-space: nowrap;
 }
 
 nav.navbar a.active {
-  font-weight: bold;
-  text-decoration: underline;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Search Container */
+header .search-container {
+    display: flex;
+    align-items: center;
 }
 
 header .search-container input {
@@ -70,7 +79,6 @@ header .search-container input {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
 #shop {
     font-size: 25px;
     font-weight: 600;
@@ -114,25 +122,26 @@ header .search-container input {
     color: #000000;
 }
 #login-container {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
-/* Updated icon style */
+/* Logged-in Icon */
 .logged-in-icon {
-  width: 32px;
-  height: 32px;
-  background-color: #4CAF50;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
+    width: 32px;
+    height: 32px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
 }
+
 #product-list,
 .category-products {
     display: grid;
@@ -577,53 +586,56 @@ footer a:hover {
     margin-top: 20px;
 }
 @media (max-width: 480px) {
-     header {
+   header {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
         padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex-wrap: nowrap;
-        gap: 10px;
     }
-     header .logo h1 {
+
+    header .logo h1 {
         font-size: 1rem;
-        white-space: nowrap;
     }
-        nav.navbar {
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 10px;
-        flex-grow: 1;
+
+    nav.navbar {
+        flex: 1;
         justify-content: flex-end;
+        gap: 10px;
+        overflow-x: auto;
     }
+
     nav.navbar a {
         font-size: 0.75rem;
-        white-space: nowrap;
     }
-       #login-container {
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
+
+    #login-container {
+        margin-left: 8px;
     }
+
+
     header .search-container {
-       display:none;
+        display: none;
     }
+
     #categories {
         padding: 10px;
     }
+
     #shop {
         font-size: 18px;
         font-weight: 300;
     }
+
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap:10px;
+        gap: 10px;
     }
-    .category{
+
+    .category {
         padding: 5px;
     }
+
     .category img {
         height: 120px;
     }
@@ -631,49 +643,49 @@ footer a:hover {
     .category h3 {
         font-size: 14px;
     }
-    @media (max-width: 480px) {
 
-        #product-list,
-        .category-products {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 10px;
-            padding: 10px;
-        }
-    
-        .product,
-        .product1 {
-            height: auto; 
-        }
-    
-        .product img,
-        .product1 img {
-            width: 100%; 
-            height: auto;
-            max-height: 100px; 
-            object-fit: contain;
-        }
-    
-        .product h2,
-        .product1 h2 {
-            font-size: 0.9em; 
-            height: auto; 
-            line-height: 1.2;
-        }
-    
-        .product button,
-        .product1 button {
-            font-size: 0.8em; 
-            padding: 8px 12px; 
-        }
+    #product-list,
+    .category-products {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px;
+        padding: 10px;
     }
- 
+
+    .product,
+    .product1 {
+        height: auto; 
+    }
+
+    .product img,
+    .product1 img {
+        width: 100%; 
+        height: auto;
+        max-height: 100px; 
+        object-fit: contain;
+    }
+
+    .product h2,
+    .product1 h2 {
+        font-size: 0.9em; 
+        height: auto; 
+        line-height: 1.2;
+    }
+
+    .product button,
+    .product1 button {
+        font-size: 0.8em; 
+        padding: 8px 12px; 
+    }
+
     #cart {
         padding: 5px;
     }
+
     .cart-total {
         font-size: 1rem;
     }
+
     #account {
         padding: 5px;
     }
@@ -681,6 +693,7 @@ footer a:hover {
     .order-item {
         padding: 2px 0;
     }
+
     footer {
         padding: 10px 2%;
     }
@@ -720,6 +733,7 @@ footer a:hover {
     .order-item {
         flex-basis: 100%;
     }
+
     .cart-item {  
         display: flex;
         align-items: center;
@@ -775,7 +789,7 @@ footer a:hover {
         white-space: nowrap;
         text-align: center;
     }
-    
+
     #pro {
         font-size: 20px;
         font-weight: 300;
