@@ -583,7 +583,7 @@ footer a:hover {
         padding: 7px 10px;
         display: flex;
         align-items: center;
-        gap:45px;
+        gap:35px;
     }
     header .logo h1 {
         font-size: 1.2rem;
@@ -619,6 +619,7 @@ footer a:hover {
         font-size: 14px;
     }
     @media (max-width: 480px) {
+
         #product-list,
         .category-products {
             display: grid;
