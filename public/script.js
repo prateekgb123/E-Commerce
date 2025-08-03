@@ -151,7 +151,36 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     updateCartCount();
     setupEventListeners();
+    handleLoginIcon(); // Add this line
 });
+
+function handleLoginIcon() {
+    const loginContainer = document.getElementById("login-container");
+    const username = localStorage.getItem("username");
+
+    if (username) {
+        loginContainer.innerHTML = `
+            <div id="user-icon" class="logged-in-icon" title="Logged in as ${username}">
+                ${username.charAt(0).toUpperCase()}
+            </div>
+        `;
+
+        const userIcon = document.getElementById("user-icon");
+        userIcon.style.cursor = "pointer";
+
+        userIcon.addEventListener("click", () => {
+            if (confirm("Do you want to log out?")) {
+                localStorage.removeItem("username");
+                location.reload();
+            }
+        });
+    } else {
+        loginContainer.innerHTML = `
+            <a href="sign.html" id="login-tab">Login</a>
+        `;
+    }
+}
+
 function loadProducts() {
     displayProducts(Object.values(categoryData).flat());
 }

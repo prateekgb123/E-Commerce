@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login / Signup</title>
     <style>
-        .loginSection{
-
+        .loginSection {
             background-color: aqua;
         }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -18,29 +18,29 @@
             height: 100vh;
             margin: 0;
         }
-    
+
         .container {
-            background: rgb(255, 255, 255);
+            background: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 350px;
         }
-    
+
         form {
             display: flex;
             flex-direction: column;
             margin-top: 10px;
         }
-    
+
         input {
             padding: 10px;
             margin: 8px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-    
+
         button {
             background-color: #28a745;
             color: white;
@@ -51,55 +51,62 @@
             border-radius: 5px;
             font-size: 16px;
         }
-    
+
         button:hover {
             background-color: #257f37;
         }
-    
+
         .toggle-link {
             color: #007bff;
             cursor: pointer;
             margin-top: 10px;
         }
-    
+
         .toggle-link:hover {
             text-decoration: underline;
         }
-    
+
         #message {
             margin-top: 10px;
             color: red;
             font-size: 14px;
         }
-    
+
         #logoutBtn {
             background-color: red;
-            margin:10px;
+            margin: 10px;
         }
+
+        #loading {
+            margin-top: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+
         @media screen and (max-width: 480px) {
             body {
                 padding: 10px;
             }
-    
+
             .container {
                 width: 100%;
                 box-sizing: border-box;
             }
-    
+
             input,
             button {
                 font-size: 14px;
             }
-            #msg{
+
+            #msg {
                 font-size: 17px;
             }
         }
     </style>
-    
 </head>
 
 <body>
-    <div id="authContainer">
+    <div class="container" id="authContainer">
         <div id="loginSection">
             <h2>Login</h2>
             <form id="loginForm">
@@ -123,27 +130,31 @@
         </div>
 
         <p id="message"></p>
+        <p id="loading"></p>
     </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const loginSection = document.getElementById("loginSection");
             const signupSection = document.getElementById("signupSection");
             const message = document.getElementById("message");
-
+            const loading = document.getElementById("loading");
 
             document.getElementById("showSignup").addEventListener("click", () => {
                 loginSection.style.display = "none";
                 signupSection.style.display = "block";
+                message.innerText = "";
             });
 
             document.getElementById("showLogin").addEventListener("click", () => {
                 signupSection.style.display = "none";
                 loginSection.style.display = "block";
+                message.innerText = "";
             });
-
 
             document.getElementById("signupForm").addEventListener("submit", async (e) => {
                 e.preventDefault();
+                loading.innerText = "Signing up...";
 
                 const username = document.getElementById("signupUsername").value.trim();
                 const email = document.getElementById("signupEmail").value.trim();
@@ -152,16 +163,18 @@
 
                 if (!username || !email || !password || !confirmPassword) {
                     message.innerText = "All fields are required!";
+                    loading.innerText = "";
                     return;
                 }
 
                 if (password !== confirmPassword) {
                     message.innerText = "Passwords do not match!";
+                    loading.innerText = "";
                     return;
                 }
 
                 try {
-                    const response = await fetch('https://e-commerce-j29i.onrender.com/signup', {
+                    const response = await fetch('http://localhost:5000/signup', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ username, email, password }),
@@ -169,6 +182,7 @@
 
                     const data = await response.json();
                     message.innerText = data.message;
+                    loading.innerText = "";
 
                     if (response.ok) {
                         signupSection.style.display = "none";
@@ -177,52 +191,53 @@
                 } catch (error) {
                     console.error("Signup error:", error);
                     message.innerText = "Signup failed. Try again.";
+                    loading.innerText = "";
                 }
             });
 
+            document.getElementById("loginForm").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                loading.innerText = "Logging in...";
 
-           document.getElementById("loginForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const username = document.getElementById("loginUsername").value.trim();
-    const password = document.getElementById("loginPassword").value;
+                const username = document.getElementById("loginUsername").value.trim();
+                const password = document.getElementById("loginPassword").value;
 
-    try {
-        const response = await fetch('https://e-commerce-j29i.onrender.com/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }),
-        });
+                try {
+                    const response = await fetch('http://localhost:5000/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password }),
+                    });
 
-       
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-            const data = await response.json();
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        const data = await response.json();
 
-            if (response.ok && data.token) {
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("username", data.username);
-                showLoggedInState(data.username);
-            } else {
-                message.innerText = data.message || "Login failed.";
-            }
-        } else {
-            
-            const text = await response.text();
-            console.error("Non-JSON login response:", text);
-            message.innerText = "Unexpected response from server.";
-        }
-    } catch (error) {
-        console.error("Login error:", error);
-        message.innerText = "Login failed. Try again.";
-    }
-        });
-
+                        if (response.ok && data.token) {
+                            localStorage.setItem("token", data.token);
+                            localStorage.setItem("username", data.username);
+                            showLoggedInState(data.username);
+                        } else {
+                            message.innerText = data.message || "Login failed.";
+                        }
+                    } else {
+                        const text = await response.text();
+                        console.error("Non-JSON login response:", text);
+                        message.innerText = "Unexpected response from server.";
+                    }
+                } catch (error) {
+                    console.error("Login error:", error);
+                    message.innerText = "Login failed. Try again.";
+                } finally {
+                    loading.innerText = "";
+                }
+            });
 
             function showLoggedInState(username) {
                 document.body.innerHTML = `
-            <h2 id="msg">You are logged in as ${username}</h2>
-            <button id="logoutBtn">Logout</button>
-        `;
+                    <h2 id="msg">You are logged in as ${username}</h2>
+                    <button id="logoutBtn">Logout</button>
+                `;
 
                 document.getElementById("logoutBtn").addEventListener("click", () => {
                     localStorage.removeItem("token");
@@ -236,7 +251,6 @@
                 showLoggedInState(storedUsername);
             }
         });
-
     </script>
 </body>
 
