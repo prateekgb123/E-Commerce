@@ -26,41 +26,47 @@ body {
 }
 
 header {
-    background-color: #b4dafd;
-    color: #161717;
-    padding: 15px 40px;
-    display: flex;
-    align-items: center;
-    gap:175px;
+  background-color: #b4dafd;
+  color: #161717;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ensures login goes to right */
+  flex-wrap: wrap;
 }
+
 
 header .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-
 header .logo h1 {
-    font-size: 30px;
-    font-weight: 600;
+  font-size: 30px;
+  font-weight: 600;
 }
 
-header nav a {
-    color: rgb(37, 34, 34);
-    margin: 0 20px;
-    text-decoration: none;
-    font-size: 18px;
+nav.navbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-header nav a.active {
-    font-weight: bold;
-    text-decoration: underline;
+nav.navbar a {
+  color: rgb(37, 34, 34);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav.navbar a.active {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 header .search-container input {
     padding: 8px;
     font-size: 16px;
-    width: 200px;
+    width: 250px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
@@ -107,25 +113,26 @@ header .search-container input {
     margin: 0;
     color: #000000;
 }
-.logged-in-icon {
-    width: 32px;
-    height: 32px;
-    background-color: #4CAF50;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-
-    /* Positioning */
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000; /* ensures it stays on top */
+#login-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 
+/* Updated icon style */
+.logged-in-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
 #product-list,
 .category-products {
     display: grid;
